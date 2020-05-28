@@ -55,4 +55,7 @@ x = txtToken[xIndexer]
 y = txtToken[yIndexer]
 
 # Check you're fine
-for u,v in zip( )
+for u,v in zip(x[:50],y[:50] ) : 
+    input =  [idx2word[w] for w in u]
+    output =  [idx2word[t] for t in v]
+    print("{} ====> {} ".format(input, output))
