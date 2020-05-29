@@ -16,6 +16,7 @@ SKIP_LENGTH= 2
 datasetPath = os.path.join("G:","IA","Dataset","textes")
 srcTxt = os.path.join(datasetPath,"lyrics_rap_fr.txt")
 
+srcTxt = os.path.join(datasetPath,"lyrics_rap_fr.txt")
 
 # STEP 0 - Getting text
 with open(srcTxt,'r',encoding='utf8') as fh:
@@ -44,7 +45,7 @@ idx2word = { word2idx[word]:word for word in word2idx }
 txtArray = cleaned.split()
 txtToken =np.array([word2idx[w] for w in txtArray])
 
-# STEP 3 -
+# STEP 3 -- Build the dataset Feature --> Target
 
 nbSentences = len(txtToken) // SEQ_LENGTH
 
@@ -59,3 +60,38 @@ for u,v in zip(x[:50],y[:50] ) :
     input =  [idx2word[w] for w in u]
     output =  [idx2word[t] for t in v]
     print("{} ====> {} ".format(input, output))
+
+
+X= tf.convert_to_tensor(x)
+
+#STEP 4 -- Architecturign a Neural net for our problem
+# Most basic solution 
+
+
+model = tf.keras.Sequential([
+    tf.keras.layers.InputLayer(input_shape=(None,14)),
+    tf.keras.layers.Dense(len(vocab), activation="softmax")
+])
+
+
+
+loss = tf.keras.losses.SparseCategoricalCrossentropy()
+
+model.compile(optimizer='adam', loss=loss, metrics=['accuracy'])
+
+history = model.fit(x, y, epochs=150 )
+
+
+#  Check your model
+def generateOutput(model=model) :
+    randomIdx = np.random.randint(len(txtArray)-SEQ_LENGTH)
+    xvalid= np.array(txtArray[randomIdx:randomIdx+SEQ_LENGTH])
+    xvalidEnc = np.array([[ word2idx[w] for w in xvalid]])
+    yhat = model.predict(xvalidEnc)
+    candidatesWord = np.argsort(yhat, axis=1)
+    selectedWords = candidatesWord[0][-5:]
+    outputWord = [ idx2word[i] for i in selectedWords]
+    print("{}  ======> {} ".format(xvalid, outputWord))
+
+
+generateOutput()
