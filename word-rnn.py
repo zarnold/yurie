@@ -6,8 +6,20 @@ import numpy as np
 
 print(tf.__version__)
 # a2.2.0
-# please check that you manage cuda
+# please check that you manage CUDA
 
+
+'''
+STANDARD PIPELINE :
+  getting -text
+  clean and filter
+  tokenize it
+  build the Features and the Target
+  Architecture yor neural net
+  Define the loss
+  Run it and define a validation method 
+  Optimize
+'''
 
 SEQ_LENGTH = 14
 SKIP_LENGTH= 2
@@ -64,7 +76,7 @@ for u,v in zip(x[:50],y[:50] ) :
 
 X= tf.convert_to_tensor(x)
 
-#STEP 4 -- Architecturign a Neural net for our problem
+#STEP 4 -- Arthictecturing a Neural net for our problem
 # Most basic solution 
 
 
