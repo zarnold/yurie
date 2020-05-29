@@ -16,7 +16,7 @@ SKIP_LENGTH= 2
 datasetPath = os.path.join("G:","IA","Dataset","textes")
 srcTxt = os.path.join(datasetPath,"lyrics_rap_fr.txt")
 
-srcTxt = os.path.join(datasetPath,"lyrics_rap_fr.txt")
+
 
 # STEP 0 - Getting text
 with open(srcTxt,'r',encoding='utf8') as fh:
