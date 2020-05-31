@@ -1,3 +1,14 @@
+La lune est blanche
+Le frigo est rempli 
+Le frigo est vide
+L armoire est vide
+L armoire est rempli
+L armoire est jaune
+J aime le sucré
+Les fraises sont sucré
+Les peches sont sucré
+Les peches sont gratuit
+Les glaces sont sucre
 je mange des glaces
 je mange des peches
 je mange des fraises
@@ -7,3 +18,28 @@ les fraises sont rouge
 j aime le rouge
 j aime le blanche
 j aime le jaune
+le nain est petit
+le géant est grand
+la mer est verte
+le ciel est immense
+le monde est vaste
+la lampe est allumee
+la lune est loin
+La lune est jolie
+La lune est grand
+Les peches sont petit
+Les fraises sont petit
+j aime me promener
+j aime chanter
+il aime voir la mer
+il aime regarder le soleil
+Il marche longtemps
+Je suis grand
+J aime les glaces
+L ISS tourne autour de la Terre
+La Terre tourne autour du soleil
+La lune tourne autour de la Terre
+Saturne tourne autour du Soleil
+Io tourne autour de Jupiter
+Jupiter est une géante gazeuse
+La Terre est bleue
