@@ -15,28 +15,6 @@ LSTM_DECODER_SIZE=64
 
 SAMPLE_PRINT_PERIOD = 200
 
-def cleanChro(filePath):
-    text   = ""
-    with open(filePath, 'r', encoding='utf8') as fp :
-        line = fp.readline().strip()
-        while line:
-            line = fp.readline().strip()
-            g = re.match('^[0-9].*:',line)
-            if g :
-                text += line
-                text += ' ENDOFLINE '
-    return(text)
-
-
-
-
-cleaned = cleanChro(SRC)
-
-CLEANED_SRC = join(DATA_FOLDER,'cleanedChro.txt')
-with open(CLEANED_SRC,'w',encoding='utf8') as fp :
-    fp.write(t)
-
-
 
 
 #STEP 2 - Tokenizer
@@ -174,5 +152,8 @@ history = model.fit(x, y, callbacks=[
 
 
 
-
+gen(9999)
+gen(9999)
+gen(9999)
+gen(9999)
 #  np.argmax(y,axis=2) = x

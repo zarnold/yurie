@@ -15,7 +15,7 @@ Code available on [Github](https://github.com/zarnold/yurie)
 - modèle : génératif
 
 - Sequence : Suite ordonée de token
-- Source : wikipedia
+- Source : [wikipedia](https://fr.wikipedia.org/wiki/Liste_des_chronologies_th%C3%A9matiques)
 
 - Archi envisagée : VAE, DC GAN et ELECTRA
 
