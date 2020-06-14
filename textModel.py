@@ -17,7 +17,7 @@ SAMPLE_PRINT_PERIOD = 200
 BUFFER_SIZE = 100
 BATCH_SIZE = 128
 
-MAX_SEQ_LEN = 40
+MAX_SEQ_LEN = 20
 
 def cleanChro(filePath):
     text   = ""
@@ -94,11 +94,19 @@ for idx, seq in enumerate(tokenArray) :
 
 
 
+idx =np.arange(len(train))
+np.random.shuffle(idx)
+x = train[idx]
+y = tf.keras.utils.to_categorical(x, 1+len(vocab))
 
 
-x = train
-y = tf.keras.utils.to_categorical(train, 1+len(vocab))
-
+# Check your dataset
+sample = x[15:20]
+predictedTkens = np.argmax(y[15:20], axis=2)
+decodedSent = [decode(tokenSeq) for tokenSeq in predictedTkens]
+encodedSent= [decode(tokenSeq) for tokenSeq in sample]
+for u, v in zip(encodedSent, decodedSent) : 
+    print("{}   ==> {}".format(u, v))
 
 
 # This does not work 
@@ -130,7 +138,7 @@ def checkEncodage():
     decodedSent = [decode(tokenSeq) for tokenSeq in predictedTkens]
     encodedSent= [decode(tokenSeq) for tokenSeq in sample]
     for u, v in zip(encodedSent, decodedSent) : 
-        print("{}   ==> {}".format(encodedSent, decodedSent))
+        print("{}   ==> {}".format(u, v))
 
 
 
