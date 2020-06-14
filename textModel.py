@@ -1,11 +1,15 @@
 import re
 import numpy as np
 from os.path import join
+import tensorflow as tf 
+
+from tensorflow.keras.layers import Input, LSTM, Dense, RepeatVector
 
 DATA_FOLDER = join('.','DATA')
 SRC = join(DATA_FOLDER, 'humanChronology.txt')
 
-
+WORD_DIM = 6
+LATENT_DIM=3
 
 def cleanChro(filePath):
     text   = ""
@@ -69,3 +73,52 @@ for idx, seq in enumerate(tokenArray) :
 
 
 
+
+
+
+
+
+
+# This does not work 
+encoded = tf.keras.models.Sequential([
+    Input(),
+    LSTM(32, name='second_lstm'),
+    Dense(LATENT_DIM, activation='relu')
+])
+
+y2 = encoded.predict(train)
+print(y2)
+
+
+decoded =tf.keras.models.Sequential([
+    Input(shape=LATENT_DIM),
+    RepeatVector(SEQ_LEN),
+    LSTM(300, return_sequences=True, name='inter')
+])
+
+
+model = tf.keras.models.Sequential([
+    encoded,decoded
+])
+
+
+#  So here is the flow
+y = model.predict(x_train)
+
+y3 = decoded.predict(y2)
+
+tellSentence(y3[9])
+
+ran = np.random.rand(5,LATENT_DIM) 
+y3 = decoded.predict(ran)
+tellSentence(y3[2])
+
+
+# Train the whole stuff
+model.compile(optimizer='adam',
+           loss="mse",
+           metrics=['accuracy'])
+
+history = model.fit(x_train, x_train, epochs=800,
+                 callbacks=get_callbacks(),
+                 validation_data=(validation, validation))
