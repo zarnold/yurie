@@ -1,0 +1,26 @@
+{
+  "name": "yurie",
+  "version": "1.0.0",
+  "description": "getting some content from wikipedia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zarnold/yurie.git"
+  },
+  "keywords": [
+    "scrapper"
+  ],
+  "author": "arnold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zarnold/yurie/issues"
+  },
+  "homepage": "https://github.com/zarnold/yurie#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3"
+  }
+}
