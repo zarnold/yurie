@@ -21,16 +21,13 @@ STANDARD PIPELINE :
   Optimize
 '''
 
-SEQ_LENGTH = 5
-SKIP_LENGTH= 1
-WORD_DIM = 20
+SEQ_LENGTH = 10
+SKIP_LENGTH= 2
+WORD_DIM = 50
 
 # Any of you favorite source
 datasetPath = os.path.join("G:","IA","Dataset","textes")
 srcTxt = os.path.join(datasetPath,"lyrics_rap_fr.txt")
-
-srcTxt = os.path.join(".","lecture_ce2.txt")
-
 
 # STEP 0 - Getting text
 with open(srcTxt,'r',encoding='utf8') as fh:
@@ -104,9 +101,11 @@ def generateOutput(model=model) :
     print("{}  ======> {} ".format(xvalid, outputWord))
 
 
+
+
 class genCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, batch, logs=None):
-        if not batch%30 ==0 :
+        if not batch%3 ==0 :
             return             
         print("="*33)
         print(" Epoch {}".format( batch))
@@ -126,7 +125,7 @@ loss = tf.keras.losses.SparseCategoricalCrossentropy()
 
 model.compile(optimizer='adam', loss=loss, metrics=['accuracy'])
 
-history = model.fit(x, y, epochs=600, callbacks=[ genCallback()] )
+history = model.fit(x, y, epochs=60, callbacks=[ genCallback()] )
 
 
 #  Check your model
