@@ -27,3 +27,8 @@ install node, yarn, tensorflow..;
 
 - yarn install
 - node chroScrapper
+
+
+# A machine project 
+
+Getting Data -> cleaning Data -> building model -> Training
