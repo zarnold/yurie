@@ -14,6 +14,31 @@ LSTM_ENCODER_SIZE=64
 LSTM_DECODER_SIZE=64
 
 SAMPLE_PRINT_PERIOD = 200
+BUFFER_SIZE = 100
+BATCH_SIZE = 128
+
+MAX_SEQ_LEN = 40
+
+def cleanChro(filePath):
+    text   = ""
+    with open(filePath, 'r', encoding='utf8') as fp :
+        lines = fp.read().split('\n')    
+    for line in lines :
+        g = re.match('^[0-9].*:',line)
+        if g :
+            text += ' '.join(line.split()[:MAX_SEQ_LEN])
+            text += ' ENDOFLINE '
+    return(text)
+
+
+
+
+cleaned = cleanChro(SRC)
+
+CLEANED_SRC = join(DATA_FOLDER,'cleanedChro.txt')
+with open(CLEANED_SRC,'a',encoding='utf8') as fp :
+    fp.write(cleaned)
+
 
 
 
@@ -56,6 +81,9 @@ train = np.zeros((len(txtArray), SEQ_LEN), dtype=int)
 train.fill(len(vocab))
 print(train.shape)
 
+
+
+
 padAfter = False
 for idx, seq in enumerate(tokenArray) :
     if padAfter : 
@@ -85,7 +113,7 @@ decoded =tf.keras.models.Sequential([
         Input( shape=( LATENT_DIM, )),
         RepeatVector(SEQ_LEN),
         LSTM(LSTM_DECODER_SIZE, return_sequences=True),
-        TimeDistributed(Dense(1 + len(vocab), activation='relu'))
+        Dense(1 + len(vocab), activation='relu')
 ])
 
 
@@ -124,7 +152,6 @@ def gen(e):
 gen(0)
 
 
-# Train the whole stuff
 
 
 checkpoint_path=join(".","training_checkpoints", 'fibreDestroyer')
@@ -144,13 +171,16 @@ model.compile(optimizer='adam',
 
 
 
-history = model.fit(x, y, callbacks=[
+history = model.fit(x,y, callbacks=[
                      tf.keras.callbacks.TensorBoard("logs/abw-crusher"), 
                      genCallback()],
                      epochs=2000)
 
 
 
+# ?
+a=x[0]
+b=y[0]
 
 gen(9999)
 gen(9999)
